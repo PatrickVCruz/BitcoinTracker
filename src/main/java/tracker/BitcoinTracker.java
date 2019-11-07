@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.TreeMap;
 import org.json.JSONObject;
 
-public class bitcoinTracker {
+public class BitcoinTracker {
 
   private String bitcoinEndpoint;
   private String currentPrice = "";
@@ -24,12 +24,12 @@ public class bitcoinTracker {
   private String endTime;
   private String jsonResult;
 
-  public bitcoinTracker() {
+  public BitcoinTracker() {
     currency = "EUR";
     bitcoinEndpoint = "https://api.coindesk.com/v1/bpi/currentprice/" + currency + ".json";
   }
 
-  public bitcoinTracker(String currency) {
+  public BitcoinTracker(String currency) {
     if (currency.length() < 3) {
       this.currency = "EUR";
     }
@@ -37,7 +37,7 @@ public class bitcoinTracker {
     bitcoinEndpoint = "https://api.coindesk.com/v1/bpi/currentprice/" + currency + ".json";
   }
 
-  public bitcoinTracker(String startTime, String endTime) {
+  public BitcoinTracker(String startTime, String endTime) {
     this.startTime = startTime;
     this.endTime = endTime;
     bitcoinEndpoint =
@@ -70,11 +70,13 @@ public class bitcoinTracker {
       urlConnection.disconnect();
     }
     jsonResult = String.valueOf(result);
+
   }
 
   public String getCurrentPrice() {
     String result = parseResult();
     JSONObject obj = new JSONObject(result);
+
     currentPrice = obj.getJSONObject("bpi").getJSONObject(currency).getString("rate");
     currentTime = obj.getJSONObject("time").getString("updated");
 
@@ -107,6 +109,7 @@ public class bitcoinTracker {
     JsonElement jsonElement = jParser.parse(jsonResult);
     Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     return gson.toJson(jsonElement);
+
   }
 
   public String getStartTime() {

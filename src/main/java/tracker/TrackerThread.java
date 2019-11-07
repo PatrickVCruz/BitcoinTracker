@@ -1,13 +1,13 @@
 package tracker;
 
-public class trackerThread implements Runnable {
+public class TrackerThread implements Runnable {
   private Thread t;
   private String threadName;
-  private bitcoinTracker tracker;
+  private BitcoinTracker tracker;
 
-  public trackerThread(String name){
+  public TrackerThread(String name){
     threadName = name;
-    tracker = new bitcoinTracker();
+    tracker = new BitcoinTracker();
     System.out.println("Creating " +  threadName );
   }
 
